@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Auto Peças da Roque | Catálogo</title>
+<script src="https://cdn.tailwindcss.com"></script><script src="https://unpkg.com/lucide@latest"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>body{font-family:Inter,sans-serif}.hero-pattern{background-color:#dc2626;background-image:radial-gradient(#ef4444 1px,transparent 1px);background-size:20px 20px}</style>
+
+<style id="roque-premium-refresh">
+:root{--roque-red:#e11d2e;--roque-dark:#101114;--roque-ink:#17181b;--roque-soft:#f4f5f7}
+html{scroll-behavior:smooth;scroll-padding-top:100px}
+body{font-family:Inter,system-ui,sans-serif;background:var(--roque-soft);color:var(--roque-ink);letter-spacing:-.01em}
+body>div:first-child{background:linear-gradient(90deg,#080808,#242428)!important;color:#e5e7eb!important}
+header{background:rgba(15,15,17,.97)!important;color:#fff!important;border-bottom:1px solid rgba(255,255,255,.08);box-shadow:0 8px 28px rgba(0,0,0,.18)!important;backdrop-filter:blur(14px)}
+header h1{color:#fff!important;letter-spacing:.04em}
+header input{background:#fff!important;color:#171717!important;border:1px solid #d1d5db!important}
+header button:first-child{background:#242428!important;color:#fff!important;border-color:#3f3f46!important}
+header button:last-child{background:var(--roque-red)!important;box-shadow:0 5px 16px #e11d2e44}
+header>div>div:first-child>div:first-child{background:linear-gradient(135deg,#e11d2e,#991b1b)!important;box-shadow:0 5px 18px #e11d2e33}
+.hero-pattern{background-color:#101114!important;background-image:radial-gradient(rgba(225,29,46,.22) 1px,transparent 1px),linear-gradient(115deg,#111114 0%,#242428 55%,#151517 100%)!important;background-size:18px 18px,cover!important;position:relative;overflow:hidden}
+.hero-pattern:after{content:"";position:absolute;right:-8%;top:-35%;width:55%;height:150%;border-radius:50%;border:1px solid rgba(225,29,46,.22);box-shadow:0 0 0 35px rgba(225,29,46,.035),0 0 0 70px rgba(225,29,46,.025);pointer-events:none}
+.hero-pattern>div{position:relative;z-index:1;padding-top:clamp(2.5rem,6vw,5rem);padding-bottom:clamp(2.5rem,6vw,5rem)}
+.hero-pattern h2{line-height:1.08;letter-spacing:-.045em;text-wrap:balance}
+.hero-pattern p{color:#d1d5db!important;font-size:1.05rem;line-height:1.65}
+.hero-pattern span{background:#fff!important;color:var(--roque-red)!important;box-shadow:0 4px 15px #0002}
+.hero-pattern a{background:var(--roque-red)!important;color:#fff!important;border-radius:12px!important;box-shadow:0 8px 24px #e11d2e40;transition:transform .2s,box-shadow .2s}
+.hero-pattern a:hover{transform:translateY(-2px);box-shadow:0 12px 30px #e11d2e55}
+.hero-pattern>div>div:last-child{background:linear-gradient(145deg,#ffffff12,#ffffff05)!important;border:1px solid #ffffff20;box-shadow:inset 0 1px 0 #ffffff18;backdrop-filter:blur(8px)}
+section.bg-white.border-b{background:#fff!important;border-color:#e5e7eb!important}
+section.bg-white.border-b>div>div{padding:14px 10px;border-radius:14px;background:#f8f8f9;border:1px solid #ececef}
+main#catalogo{padding-top:2.5rem!important}
+#catalogo h3{letter-spacing:-.04em;color:#161619}
+#categoryButtons button{border-radius:999px!important;padding:9px 16px!important;font-weight:600!important;border:1px solid #e5e7eb;transition:all .18s}
+#categoryButtons button:hover{transform:translateY(-1px)}
+#categoryButtons button.bg-red-600{background:var(--roque-red)!important;border-color:var(--roque-red)!important;box-shadow:0 4px 12px #e11d2e30}
+#productGrid article{border:1px solid #e7e7eb!important;border-radius:20px!important;box-shadow:0 5px 18px rgba(17,17,24,.045)!important;transition:transform .22s,box-shadow .22s; background:#fff}
+#productGrid article:hover{transform:translateY(-5px);box-shadow:0 16px 32px rgba(17,17,24,.11)!important}
+#productGrid article>div:first-child{height:220px!important;background:linear-gradient(180deg,#fafafa,#f0f1f3)!important}
+#productGrid article>div:first-child img{transition:transform .3s}
+#productGrid article:hover>div:first-child img{transform:scale(1.04)}
+#productGrid article>div:first-child span{background:var(--roque-dark)!important;border-radius:999px!important;letter-spacing:.07em}
+#productGrid article h4{font-size:1rem;line-height:1.45}
+#productGrid article .text-xl{font-size:1.35rem!important;letter-spacing:-.04em}
+#productGrid article button{background:var(--roque-red)!important;border-radius:12px!important;min-width:48px;box-shadow:0 4px 12px #e11d2e28;transition:transform .15s}
+#productGrid article button:hover{transform:scale(1.04)}
+footer{background:#101114!important;border-top-color:var(--roque-red)!important}
+#loginModal>div,#adminModal>div,#cartModal>div{border-radius:22px!important;box-shadow:0 25px 70px #0004}
+input,select{accent-color:var(--roque-red)}
+button{transition:filter .15s}
+button:active{filter:brightness(.94)}
+@media(max-width:640px){
+ header>div:first-child{padding-top:12px!important;padding-bottom:12px!important}
+ header button{padding:9px 10px!important;font-size:12px!important}
+ header h1{font-size:16px!important}
+ .hero-pattern>div{padding-left:18px!important;padding-right:18px!important}
+ .hero-pattern h2{font-size:2.15rem!important}
+ .hero-pattern>div>div:last-child{padding:26px!important}
+ section.bg-white.border-b>div{gap:10px!important}
+ #catalogo{padding-left:14px!important;padding-right:14px!important}
+ #catalogo h3{font-size:1.35rem!important}
+ #productGrid{gap:14px!important}
+ #productGrid article>div:first-child{height:190px!important}
+ #productGrid article>div:last-child{padding:15px!important}
+ #productGrid article .text-xl{font-size:1.2rem!important}
+}
+</style>
+
+
+<style id="roque-catalog-polish">
+.roque-catalog-heading{position:relative;padding-left:14px}
+.roque-catalog-heading:before{content:"";position:absolute;left:0;top:4px;bottom:5px;width:4px;border-radius:8px;background:#e11d2e}
+.roque-eyebrow{display:block;font-size:10px;font-weight:800;letter-spacing:.18em;color:#e11d2e;margin-bottom:7px}
+.roque-catalog-heading h3{font-size:clamp(1.5rem,3vw,2rem)!important;line-height:1.15}
+.roque-catalog-heading h3 span{color:#e11d2e}
+.roque-product-card{min-width:0}
+.roque-product-photo{background:linear-gradient(145deg,#fbfbfc,#f0f1f3)!important}
+.roque-product-category{border-radius:999px!important;padding:6px 10px!important;letter-spacing:.06em}
+.roque-product-info h4{overflow-wrap:anywhere}
+.roque-product-bottom{border-color:#ececef!important}
+.roque-add-button{white-space:nowrap;box-shadow:0 4px 12px #e11d2e28}
+#categoryButtons{max-width:100%}
+@media(max-width:639px){
+ #categoryButtons{flex-wrap:nowrap!important;overflow-x:auto;overflow-y:hidden;padding:2px 1px 8px;scrollbar-width:none}
+ #categoryButtons::-webkit-scrollbar{display:none}
+ #categoryButtons button{flex:0 0 auto}
+ #productGrid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important}
+ .roque-product-photo{height:145px!important}
+ .roque-product-info{padding:12px!important}
+ .roque-product-info h4{font-size:12px!important;line-height:1.4!important;min-height:34px}
+ .roque-product-info p{font-size:10px!important;line-height:1.45!important;margin-bottom:10px!important}
+ .roque-product-price{font-size:15px!important;line-height:1.2}
+ .roque-product-bottom{align-items:center!important;padding-top:10px!important}
+ .roque-add-button{padding:9px 8px!important;font-size:10px!important}
+ .roque-product-category{font-size:8px!important;padding:5px 7px!important}
+}
+@media(max-width:360px){.roque-add-button span{display:none}.roque-product-price{font-size:14px!important}}
+</style>
+
+
+<style id="roque-oil-promo-style">
+#roque-oil-promo{position:relative;isolation:isolate;overflow:hidden;background:radial-gradient(circle at 82% 35%,rgba(239,68,68,.30),transparent 28%),linear-gradient(115deg,#101114 0%,#242428 55%,#650d18 100%);color:#fff}
+#roque-oil-promo:before{content:"";position:absolute;z-index:-1;width:390px;height:390px;border:1px solid #ffffff18;border-radius:50%;right:-90px;top:-170px;box-shadow:0 0 0 35px #ffffff08,0 0 0 75px #ffffff05}
+#roque-oil-promo .oil-promo-inner{box-sizing:border-box;width:100%;max-width:1280px;margin:0 auto;padding:30px 24px;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(280px,.8fr);gap:24px;align-items:center}
+#roque-oil-promo .oil-kicker{display:inline-flex;align-items:center;gap:7px;background:#ffffff16;border:1px solid #ffffff30;border-radius:999px;padding:7px 12px;color:#fecaca;font-size:10px;font-weight:900;letter-spacing:.16em;text-transform:uppercase}
+#roque-oil-promo h2{font-size:clamp(25px,4vw,42px);font-weight:900;line-height:1.03;letter-spacing:-.045em;margin:13px 0 9px}
+#roque-oil-promo h2 em{font-style:normal;color:#fca5a5}
+#roque-oil-promo .oil-sub{color:#e5e7eb;font-size:14px;line-height:1.6;max-width:540px}
+#roque-oil-promo .oil-price-panel{background:linear-gradient(145deg,#fff 0%,#f3f4f6 100%);color:#171717;border-radius:22px;padding:20px 24px;box-shadow:0 18px 45px #0005;transform:none;width:100%;max-width:380px;box-sizing:border-box;margin:0 auto;text-align:center}
+#roque-oil-promo .oil-price-label{font-size:11px;font-weight:900;letter-spacing:.18em;color:#6b7280;text-transform:uppercase}
+#roque-oil-promo .oil-price{display:flex;align-items:center;justify-content:center;color:#dc2626;font-weight:1000;line-height:1;letter-spacing:-.07em;margin:7px 0}
+#roque-oil-promo .oil-price small{font-size:22px;letter-spacing:0;margin:0 4px 0 0}
+#roque-oil-promo .oil-price strong{font-size:clamp(54px,8vw,82px)}
+#roque-oil-promo .oil-price sup{font-size:27px;letter-spacing:-.04em;margin:0 0 0 3px;line-height:1}
+#roque-oil-promo .oil-cta{display:inline-flex;justify-content:center;align-items:center;gap:9px;margin-top:18px;padding:13px 19px;border-radius:12px;background:#e11d2e;color:white;font-size:13px;font-weight:900;text-decoration:none;box-shadow:0 8px 22px #e11d2e55;transition:transform .2s}
+#roque-oil-promo .oil-cta:hover{transform:translateY(-2px)}
+#roque-oil-promo .oil-note{font-size:10px;color:#d1d5db;margin-top:10px}
+#roque-oil-promo .oil-benefits{display:flex;flex-wrap:wrap;gap:9px;margin-top:17px}
+#roque-oil-promo .oil-benefits span{font-size:11px;color:#f3f4f6;background:#ffffff12;border:1px solid #ffffff20;border-radius:9px;padding:8px 10px}
+@media(max-width:700px){#roque-oil-promo .oil-promo-inner{grid-template-columns:minmax(0,1fr);padding:24px 17px;gap:19px}#roque-oil-promo .oil-price-panel{max-width:380px;width:100%;margin:0 auto;padding:16px 18px;transform:none}#roque-oil-promo h2{font-size:31px}#roque-oil-promo .oil-price strong{font-size:66px}}
+</style>
+
+</head>
+<body class="bg-gray-50 text-gray-800 min-h-screen flex flex-col">
+<div class="bg-gray-900 text-gray-200 text-xs py-2 px-4"><div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2"><span>📍 <b>Endereço:</b> Rua Roque Barbosa, 16</span><div class="flex gap-4"><a href="https://wa.me/5521973227156">(21) 97322-7156</a><a href="https://wa.me/5521970286376">(21) 97028-6376</a></div></div></div>
+<header class="bg-white shadow-md sticky top-0 z-40"><div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-3"><div onclick="resetFilters()" class="flex items-center gap-3 cursor-pointer"><div class="bg-red-600 text-white p-2 rounded-lg font-black text-xl">🔧 ROQUE</div><div><h1 class="font-extrabold text-xl">AUTO PEÇAS</h1><span class="text-xs text-red-600 font-semibold tracking-widest uppercase">Da Roque</span></div></div><div class="hidden md:block flex-1 max-w-md mx-5"><input id="searchInput" oninput="renderProducts()" placeholder="Buscar peças..." class="w-full px-4 py-2 border rounded-full text-sm"></div><div class="flex gap-2"><button onclick="openAdmin()" class="bg-gray-100 border rounded-lg px-3 py-2 text-sm font-semibold">🔐 Administração</button><button onclick="toggleCart()" class="bg-red-600 text-white rounded-lg px-4 py-2 text-sm">🛒 Carrinho <span id="cartCount">0</span></button></div></div><div class="md:hidden px-4 pb-3"><input id="mobileSearch" oninput="document.getElementById('searchInput').value=this.value;renderProducts()" placeholder="Buscar produtos..." class="w-full px-4 py-2 border rounded-full text-sm"></div></header>
+<section class="hero-pattern text-white"><div class="max-w-7xl mx-auto px-4 py-12 grid md:grid-cols-2 gap-8 items-center"><div class="text-center md:text-left"><span class="bg-white text-red-600 text-xs font-bold px-3 py-1 rounded-full">Rua Roque Barbosa, 16 • Atendimento rápido</span><h2 class="text-3xl md:text-5xl font-black mt-4">QUALIDADE E PREÇO JUSTO PARA O SEU CARRO</h2><p class="mt-4 text-red-100">Óleos, aditivos e peças automotivas. Compre diretamente pelo WhatsApp!</p><a href="#catalogo" class="inline-block bg-white text-red-600 font-bold px-6 py-3 rounded-lg mt-5">Ver Catálogo</a></div><div class="bg-white/10 rounded-2xl p-8 text-center text-6xl">🚘<p class="text-xs tracking-widest mt-3">PEÇAS MULTIMARCAS • ÓLEOS • ADITIVOS</p></div></div></section>
+
+<section id="roque-oil-promo" aria-label="Promoção de óleos automotivos">
+  <div class="oil-promo-inner">
+    <div>
+      <span class="oil-kicker">⚡ Oferta especial • Auto Peças da Roque</span>
+      <h2>SEU MOTOR MERECE<br><em>O MELHOR CUIDADO.</em></h2>
+      <p class="oil-sub">Encontre o óleo ideal para seu veículo com qualidade e preço justo. Confira as opções disponíveis no nosso catálogo!</p>
+      <div class="oil-benefits">
+        <span>🛠️ Proteção para o motor</span>
+        <span>🚘 Diversas viscosidades</span>
+        <span>🤝 Atendimento pelo WhatsApp</span>
+      </div>
+    </div>
+    <div class="oil-price-panel">
+      <div class="oil-price-label">Óleos automotivos a partir de</div>
+      <div class="oil-price"><small>R$</small><strong>24</strong><sup>,99</sup></div>
+      <div style="font-size:11px;font-weight:800;color:#4b5563">CONSULTE MODELOS E DISPONIBILIDADE</div>
+      <a class="oil-cta" href="#catalogo" onclick="setTimeout(()=>selectCategory('Óleos'),80)">🛒 VER ÓLEOS NO CATÁLOGO</a>
+      <div class="oil-note">Preço sujeito à disponibilidade dos produtos.</div>
+    </div>
+  </div>
+</section>
+
+<section class="bg-white border-b py-5"><div class="max-w-7xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-4 text-center text-sm"><div>🛡️ <b>Peças de qualidade</b><p class="text-xs text-gray-500">Garantia conforme produto</p></div><div>🚚 <b>Entrega rápida</b><p class="text-xs text-gray-500">Consulte a região</p></div><div>💳 <b>Pagamento facilitado</b><p class="text-xs text-gray-500">Pix e cartão</p></div><div>🎧 <b>Suporte</b><p class="text-xs text-gray-500">Tire dúvidas pelo WhatsApp</p></div></div></section>
+<main id="catalogo" class="flex-grow max-w-7xl mx-auto px-4 py-10 w-full"><div id="syncNotice" class="mb-5 rounded-xl border border-amber-200 bg-amber-50 p-3 text-sm text-amber-900">Catálogo compartilhado. O cadastro e a edição são restritos ao administrador.</div><div class="flex flex-col md:flex-row justify-between gap-4 mb-7"><div class="roque-catalog-heading"><span class="roque-eyebrow">ENCONTRE A PEÇA CERTA</span><h3 class="text-2xl font-black uppercase">Catálogo <span>de Peças</span></h3><p class="text-gray-500 text-sm">Produtos para cuidar do seu carro, com preço justo.</p></div><div id="categoryButtons" class="flex flex-wrap gap-2"></div></div><div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"></div><div id="emptyState" class="hidden text-center py-12">Nenhum produto encontrado.</div></main>
+<!-- Login do administrador Supabase -->
+<div id="loginModal" class="hidden fixed inset-0 bg-black/60 z-[70] flex items-center justify-center p-4"><div class="bg-white rounded-2xl max-w-sm w-full p-6 relative"><button onclick="closeLogin()" class="absolute right-4 top-3 text-2xl">×</button><h3 class="text-xl font-bold mb-2">Acesso do administrador</h3><p class="text-sm text-gray-500 mb-4">Somente a conta autorizada pode cadastrar ou editar produtos.</p><form onsubmit="loginAdmin(event)" class="space-y-3"><label class="block text-xs font-bold">E-mail<input id="adminEmail" type="email" autocomplete="username" required class="w-full border rounded-lg p-2 mt-1"></label><label class="block text-xs font-bold">Senha<input id="adminPassword" type="password" autocomplete="current-password" required class="w-full border rounded-lg p-2 mt-1"></label><p id="loginError" class="text-sm text-red-600"></p><button id="loginSubmit" class="bg-red-600 text-white font-bold rounded-lg px-5 py-2 w-full">Entrar</button></form></div></div>
+<!-- Admin dialog: cadastro e edição do produto e imagem -->
+<div id="adminModal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4"><div class="bg-white rounded-2xl max-w-lg w-full p-6 max-h-[90vh] overflow-y-auto relative"><button onclick="closeAdmin()" class="absolute right-4 top-3 text-2xl">×</button><h3 class="text-xl font-bold mb-4" id="adminTitle">Cadastrar produto</h3><form id="productForm" onsubmit="saveProduct(event)" class="space-y-3"><input type="hidden" id="pId"><label class="block text-xs font-bold">Nome do produto<input id="pName" required class="w-full border rounded-lg p-2 mt-1"></label><div class="grid grid-cols-2 gap-3"><label class="block text-xs font-bold">Preço (R$)<input id="pPrice" type="number" step="0.01" min="0" required class="w-full border rounded-lg p-2 mt-1"></label><label class="block text-xs font-bold">Categoria<select id="pCategory" class="w-full border rounded-lg p-2 mt-1"><option>Óleos</option><option>Aditivos</option><option>Freios</option><option>Motor</option><option>Elétrica</option><option>Suspensão</option><option>Acessórios</option><option>Baterias</option></select></label></div><label class="block text-xs font-bold">Descrição<input id="pDesc" class="w-full border rounded-lg p-2 mt-1"></label><label class="block text-xs font-bold">Imagem do produto (arquivo do celular/computador)<input id="pImageFile" type="file" accept="image/*" onchange="previewImage(event)" class="w-full border rounded-lg p-2 mt-1"></label><label class="block text-xs font-bold">Ou URL da imagem<input id="pImageUrl" type="url" placeholder="https://..." class="w-full border rounded-lg p-2 mt-1"></label><img id="imagePreview" class="hidden max-h-48 mx-auto object-contain rounded-lg border" alt="Prévia da imagem"><p class="text-xs text-gray-500">As alterações são sincronizadas com o Supabase e ficam visíveis para os visitantes. O acesso de edição é restrito ao administrador.</p><div class="flex justify-end gap-2 pt-2"><button type="button" onclick="adminLogout();closeAdmin()" class="border rounded-lg px-4 py-2">Sair</button><button type="button" onclick="closeAdmin()" class="border rounded-lg px-4 py-2">Cancelar</button><button class="bg-red-600 text-white font-bold rounded-lg px-5 py-2">Salvar</button></div></form></div></div>
+<div id="cartModal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4"><div class="bg-white rounded-2xl max-w-md w-full p-6 max-h-[90vh] flex flex-col relative"><button onclick="toggleCart()" class="absolute right-4 top-3 text-2xl">×</button><h3 class="text-xl font-bold border-b pb-3 mb-3">🛍️ Seu Carrinho</h3><div id="cartItems" class="overflow-y-auto space-y-3 flex-grow"></div><div class="border-t pt-4"><label for="orderPayment" class="block text-sm font-semibold mb-2">Forma de pagamento</label><select id="orderPayment" class="w-full border rounded-lg p-3 mb-3"><option value="A combinar">A combinar</option><option value="Pix">Pix</option><option value="Dinheiro">Dinheiro</option><option value="Cartão de débito">Cartão de débito</option><option value="Cartão de crédito">Cartão de crédito</option></select><div class="flex justify-between font-bold text-xl mb-3"><span>Total</span><span id="cartTotal" class="text-red-600">R$ 0,00</span></div><button onclick="sendOrder('5521973227156')" class="w-full bg-green-600 text-white font-bold p-3 rounded-xl mb-2">Enviar pedido para (21) 97322-7156</button><button onclick="sendOrder('5521970286376')" class="w-full bg-emerald-600 text-white font-bold p-3 rounded-xl">Enviar pedido para (21) 97028-6376</button></div></div></div>
+<footer class="bg-gray-900 text-white mt-12 border-t-4 border-red-600"><div class="max-w-7xl mx-auto px-4 py-8 text-sm"><b>ROQUE AUTO PEÇAS</b><p class="text-gray-400 mt-2">Rua Roque Barbosa, 16 • (21) 97322-7156 • (21) 97028-6376</p><p class="text-gray-500 mt-3">Segunda a sexta: 08h às 18h • Sábado: 08h às 13h</p><p class="text-gray-500 mt-2">© <span id="year"></span> Auto Peças da Roque.</p></div></footer>
+
+<a href="#catalogo" id="roque-float-catalog" aria-label="Ir para catálogo"
+ style="position:fixed;right:18px;bottom:18px;z-index:35;background:#e11d2e;color:#fff;
+ border-radius:999px;padding:13px 18px;font:700 13px Inter,system-ui;box-shadow:0 8px 24px #e11d2e55;
+ text-decoration:none;display:flex;align-items:center;gap:8px">
+ <span style="font-size:17px">🛒</span> Ver catálogo
+</a>
+
+<div id="toast" class="fixed bottom-5 right-5 bg-gray-900 text-white p-3 rounded-xl z-[60] hidden"></div>
+<script>
+const seedProducts=[
+{id:1,name:"Bateria JMF 50A",price:229.90,category:"Baterias",image:"",description:"Bateria automotiva 50 amperes • 1 ano de garantia"},
+{id:2,name:"Bateria JMF 60A",price:259.90,category:"Baterias",image:"",description:"Bateria automotiva 60 amperes • 1 ano de garantia"},
+{id:3,name:"Óleo TechSuper Evolution 15W-40 Semissintético (1L)",price:26.00,category:"Óleos",image:"",description:"Óleo semissintético 15W-40 • embalagem de 1 litro"},
+{id:4,name:"Aditivo Paraflu Pronto Para Uso (1L)",price:20.00,category:"Aditivos",image:"",description:"Aditivo pronto para uso • embalagem de 1 litro"},
+{id:5,name:"Aditivo Coolant Organic Plus (5L)",price:15.00,category:"Aditivos",image:"",description:"Aditivo Coolant Organic Plus • galão de 5 litros"},
+{id:6,name:"Lâmpada Camarão / Pingo (T10 W5W)",price:3.00,category:"Elétrica",image:"",description:"Lâmpada automotiva tipo T10 W5W"},
+{id:7,name:"Pastilha de Freio Celta/Corsa TRW (PD 42)",price:49.90,category:"Freios",image:"",description:"Pastilha de freio TRW • aplicação Celta/Corsa • código PD 42"}
+];
+/*
+Supabase: leitura pública. Escrita somente por usuário autenticado.
+Desative signups públicos em Authentication > Settings e crie o administrador
+manualmente em Authentication > Users. Não embuta a senha no HTML.
+*/
+const SUPABASE_URL = "https://bmnuoanydzigmeduoxdo.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_YpMlH8RqX64d3MMK6giAgw_CfUvfX1v";
+const cloudConfigured = SUPABASE_URL.startsWith("https://") && !SUPABASE_URL.includes("COLE_AQUI") && !SUPABASE_ANON_KEY.includes("COLE_AQUI");
+
+let products=loadLocalProducts(),cart=[],selectedCategory="Todas";
+let adminSession=null;
+try{adminSession=JSON.parse(localStorage.getItem("roqueAdminSession")||"null");}catch(e){adminSession=null;}
+function isAdmin(){return !!(adminSession&&adminSession.access_token&&adminSession.expires_at>Date.now());}
+function closeLogin(){document.getElementById("loginModal").classList.add("hidden");}
+async function loginAdmin(e){
+ e.preventDefault();const email=document.getElementById("adminEmail").value.trim(),password=document.getElementById("adminPassword").value;
+ const err=document.getElementById("loginError"),btn=document.getElementById("loginSubmit");err.textContent="";btn.disabled=true;btn.textContent="Entrando...";
+ try{
+  const r=await fetch(`${SUPABASE_URL}/auth/v1/token?grant_type=password`,{method:"POST",headers:{"apikey":SUPABASE_ANON_KEY,"Content-Type":"application/json"},body:JSON.stringify({email,password})});
+  const data=await r.json();if(!r.ok||!data.access_token)throw new Error(data.msg||data.message||"E-mail ou senha incorretos.");
+  adminSession={access_token:data.access_token,refresh_token:data.refresh_token,expires_at:Date.now()+((data.expires_in||3600)*1000)};
+  localStorage.setItem("roqueAdminSession",JSON.stringify(adminSession));closeLogin();toast("Acesso de administrador liberado.");renderProducts();
+  if(!products.length){products=seedProducts.map(x=>({...x}));renderCategories();renderProducts();}
+  await persist();openAdmin();
+ }catch(ex){err.textContent=ex.message||"Não foi possível entrar.";}
+ finally{btn.disabled=false;btn.textContent="Entrar";}
+}
+function adminLogout(){adminSession=null;localStorage.removeItem("roqueAdminSession");renderProducts();toast("Você saiu da administração.");}
+
+// Imagens em Base64 podem exceder a quota do localStorage.
+// Guardamos as imagens no IndexedDB e os dados leves dos produtos no localStorage.
+const IMAGE_DB_NAME="roqueProductImages";
+const IMAGE_DB_STORE="images";
+function openImageDB(){
+  return new Promise((resolve,reject)=>{
+    if(!("indexedDB" in window)){reject(new Error("IndexedDB indisponível"));return;}
+    const request=indexedDB.open(IMAGE_DB_NAME,1);
+    request.onupgradeneeded=()=>{const db=request.result;if(!db.objectStoreNames.contains(IMAGE_DB_STORE))db.createObjectStore(IMAGE_DB_STORE);};
+    request.onsuccess=()=>resolve(request.result);
+    request.onerror=()=>reject(request.error||new Error("Falha ao abrir banco de imagens"));
+  });
+}
+async function saveImageInDB(id,image){
+  const db=await openImageDB();
+  return new Promise((resolve,reject)=>{
+    const tx=db.transaction(IMAGE_DB_STORE,"readwrite"),store=tx.objectStore(IMAGE_DB_STORE);
+    if(image && image.startsWith("data:"))store.put(image,String(id));
+    else store.delete(String(id));
+    tx.oncomplete=()=>{db.close();resolve(true);};
+    tx.onerror=()=>{db.close();reject(tx.error||new Error("Falha ao salvar imagem"));};
+    tx.onabort=()=>{db.close();reject(tx.error||new Error("Operação cancelada"));};
+  });
+}
+async function getImageFromDB(id){
+  const db=await openImageDB();
+  return new Promise((resolve,reject)=>{
+    const tx=db.transaction(IMAGE_DB_STORE,"readonly"),req=tx.objectStore(IMAGE_DB_STORE).get(String(id));
+    req.onsuccess=()=>resolve(req.result||"");
+    req.onerror=()=>reject(req.error||new Error("Falha ao carregar imagem"));
+    tx.oncomplete=()=>db.close();
+    tx.onerror=()=>db.close();
+  });
+}
+async function hydrateLocalImages(){
+  try{
+    for(const product of products){
+      if(!product.image){const image=await getImageFromDB(product.id);if(image)product.image=image;}
+    }
+    renderProducts();
+  }catch(err){console.warn("Não foi possível carregar imagens locais",err);}
+}
+function loadLocalProducts(){
+  try{const saved=localStorage.getItem("roqueProducts");return saved?JSON.parse(saved):seedProducts.map(p=>({...p}));}
+  catch(e){return seedProducts.map(p=>({...p}));}
+}
+function persistLocal(){
+  try{
+    const lightProducts=products.map(p=>({...p,image:(p.image||"").startsWith("data:")?"":p.image}));
+    localStorage.setItem("roqueProducts",JSON.stringify(lightProducts));
+    Promise.all(products.map(p=>saveImageInDB(p.id,p.image||""))).catch(err=>{
+      console.error("IndexedDB image save failed",err);
+      toast("Produto salvo, mas uma imagem não pôde ser armazenada neste aparelho.");
+    });
+    return true;
+  }catch(e){console.error("Local catalog save failed",e);toast("Não foi possível salvar os dados do catálogo neste navegador.");return false;}
+}
+async function persist(){
+  if(!isAdmin()){toast("Entre como administrador para alterar o catálogo.");return false;}
+  persistLocal();
+  if(!cloudConfigured){toast("Salvo neste navegador. Configure Supabase para compartilhar.");return false;}
+  try{
+    const response=await fetch(`${SUPABASE_URL}/rest/v1/catalog_state?id=eq.1`,{
+      method:"PATCH",
+      headers:{"apikey":SUPABASE_ANON_KEY,"Authorization":`Bearer ${adminSession.access_token}`,"Content-Type":"application/json","Prefer":"return=minimal"},
+      body:JSON.stringify({products,updated_at:new Date().toISOString()})
+    });
+    if(response.ok){toast("Produto salvo e sincronizado para os visitantes.");return true;}
+    const detail=await response.text();
+    console.error("Supabase save error",detail);
+    toast("Salvo localmente, mas a sincronização falhou. Confira Supabase/RLS.");
+    return false;
+  }catch(err){console.error(err);toast("Sem conexão com o banco. Salvo localmente.");return false;}
+}
+async function loadSharedProducts(){
+  if(!cloudConfigured)return;
+  try{
+    const response=await fetch(`${SUPABASE_URL}/rest/v1/catalog_state?select=products&id=eq.1`,{
+      headers:{"apikey":SUPABASE_ANON_KEY,"Authorization":`Bearer ${SUPABASE_ANON_KEY}`}
+    });
+    if(!response.ok){console.error("Supabase load error",await response.text());toast("Banco configurado, mas leitura falhou. Confira tabela e políticas.");return;}
+    const rows=await response.json();
+    if(rows.length && Array.isArray(rows[0].products)){
+      products=rows[0].products.length?rows[0].products:seedProducts.map(p=>({...p}));
+      persistLocal();renderCategories();renderProducts();hydrateLocalImages();
+      if(rows[0].products.length)toast("Catálogo compartilhado carregado.");
+    }else{
+      // Initialize the shared catalog with the products already present on this device.
+      const payload={id:1,products,updated_at:new Date().toISOString()};
+      const init=await fetch(`${SUPABASE_URL}/rest/v1/catalog_state?on_conflict=id`,{
+        method:"POST",
+        headers:{"apikey":SUPABASE_ANON_KEY,"Authorization":`Bearer ${SUPABASE_ANON_KEY}`,"Content-Type":"application/json","Prefer":"resolution=ignore-duplicates,return=minimal"},
+        body:JSON.stringify(payload)
+      });
+      if(!init.ok)console.error("Supabase initialization error",await init.text());
+      else {
+        const verify=await fetch(`${SUPABASE_URL}/rest/v1/catalog_state?select=products&id=eq.1`,{headers:{"apikey":SUPABASE_ANON_KEY,"Authorization":`Bearer ${SUPABASE_ANON_KEY}`}});
+        if(verify.ok){const data=await verify.json();if(data.length&&Array.isArray(data[0].products)){products=data[0].products;renderCategories();renderProducts();}}
+      }
+    }
+  }catch(err){console.error(err);toast("Não foi possível carregar o catálogo compartilhado.");}
+}
+function money(n){return n.toLocaleString("pt-BR",{style:"currency",currency:"BRL"});}
+function safe(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+function renderCategories(){let cats=["Todas",...new Set(products.map(p=>p.category))];document.getElementById("categoryButtons").innerHTML=cats.map(c=>`<button onclick="selectCategory('${safe(c)}')" class="px-3 py-2 rounded-lg text-xs ${selectedCategory===c?'bg-red-600 text-white font-bold':'bg-gray-100 hover:bg-gray-200'}">${safe(c)}</button>`).join("");}
+function selectCategory(c){selectedCategory=c;renderCategories();renderProducts();}
+function renderProducts(){
+ let term=(document.getElementById("searchInput").value||document.getElementById("mobileSearch").value||"").toLowerCase().trim();
+ let list=products.filter(p=>(selectedCategory==="Todas"||p.category===selectedCategory)&&(`${p.name} ${p.description} ${p.category}`).toLowerCase().includes(term));
+ document.getElementById("emptyState").classList.toggle("hidden",list.length>0);
+ document.getElementById("productGrid").innerHTML=list.map(p=>`<article class="roque-product-card bg-white rounded-2xl shadow-sm border hover:shadow-xl flex flex-col overflow-hidden">
+ <div class="roque-product-photo relative h-48 bg-gray-100 flex items-center justify-center overflow-hidden">
+ <img src="${safe(p.image||'')}" alt="${safe(p.name)}" onerror="this.style.display='none';this.nextElementSibling.classList.remove('hidden')" class="w-full h-full object-contain p-2">
+ <div class="fallback text-5xl ${p.image?'hidden':''}">🚘</div>
+ <span class="roque-product-category absolute top-3 left-3 bg-gray-900/80 text-white text-[10px] font-bold uppercase px-2 py-1 rounded">${safe(p.category)}</span>
+ ${isAdmin()?`<button onclick="editProduct(${p.id})" title="Editar produto e imagem" class="absolute top-3 right-3 bg-white/95 text-gray-800 rounded-lg p-2 shadow">✏️</button>`:""}
+ </div>
+ <div class="roque-product-info p-5 flex flex-col flex-grow">
+ <h4 class="font-bold text-gray-900 mb-1">${safe(p.name)}</h4>
+ <p class="text-gray-500 text-xs mb-4 flex-grow">${safe(p.description||"Produto automotivo.")}</p>
+ <div class="roque-product-bottom flex items-end justify-between border-t pt-3 gap-2">
+ <div><span class="text-[10px] text-gray-400 block uppercase">Preço</span><span class="roque-product-price text-xl font-black text-red-600">${money(p.price)}</span></div>
+ <button onclick="addCart(${p.id})" class="roque-add-button bg-red-600 text-white px-3 py-3 rounded-xl font-bold text-xs">🛒 <span>Adicionar</span></button>
+ </div></div></article>`).join("");
+}
+function openAdmin(p=null){if(!isAdmin()){document.getElementById("loginModal").classList.remove("hidden");return;}document.getElementById("productForm").reset();document.getElementById("pId").value=p?p.id:"";document.getElementById("pName").value=p?p.name:"";document.getElementById("pPrice").value=p?p.price:"";document.getElementById("pCategory").value=p?p.category:"Óleos";document.getElementById("pDesc").value=p?p.description:"";document.getElementById("pImageUrl").value=p&&p.image&&!p.image.startsWith("data:")?p.image:"";let prev=document.getElementById("imagePreview");prev.src=p?p.image:"";prev.classList.toggle("hidden",!p||!p.image);document.getElementById("adminTitle").textContent=p?"Editar produto":"Cadastrar produto";document.getElementById("adminModal").classList.remove("hidden");}
+function closeAdmin(){document.getElementById("adminModal").classList.add("hidden");}
+function editProduct(id){let p=products.find(x=>x.id===id);if(p)openAdmin(p);}
+function compressImageFile(file, callback){
+  if(!file || !file.type || !file.type.startsWith("image/")){callback(null);return;}
+  const reader=new FileReader();
+  reader.onerror=()=>callback(null);
+  reader.onload=ev=>{
+    const img=new Image();
+    img.onerror=()=>callback(null);
+    img.onload=()=>{
+      try{
+        const maxDimension=560;
+        let scale=Math.min(1,maxDimension/Math.max(img.width,img.height));
+        const canvas=document.createElement("canvas");
+        const ctx=canvas.getContext("2d");
+        if(!ctx){callback(null);return;}
+        let result="";
+        for(let pass=0;pass<8;pass++){
+          canvas.width=Math.max(1,Math.round(img.width*scale));
+          canvas.height=Math.max(1,Math.round(img.height*scale));
+          ctx.clearRect(0,0,canvas.width,canvas.height);
+          ctx.drawImage(img,0,0,canvas.width,canvas.height);
+          for(let quality=0.72;quality>=0.32;quality-=0.08){
+            result=canvas.toDataURL("image/jpeg",quality);
+            if(result.length<=60000){callback(result);return;}
+          }
+          scale*=0.78;
+        }
+        if(result && result.length<=100000){callback(result);return;}
+        callback(null);
+      }catch(err){console.error("Image compression failed",err);callback(null);}
+    };
+    img.src=ev.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+function previewImage(e){
+  const file=e.target.files&&e.target.files[0];
+  if(!file)return;
+  if(!file.type.startsWith("image/")){alert("Selecione um arquivo de imagem.");e.target.value="";return;}
+  compressImageFile(file,data=>{
+    if(!data){alert("Não foi possível comprimir essa imagem. Tente uma imagem JPG ou PNG menor.");e.target.value="";return;}
+    const im=document.getElementById("imagePreview");
+    im.src=data;im.classList.remove("hidden");
+    document.getElementById("pImageUrl").value="";
+  });
+}
+function saveProduct(e){e.preventDefault();let id=document.getElementById("pId").value,name=document.getElementById("pName").value.trim(),price=Number(document.getElementById("pPrice").value),category=document.getElementById("pCategory").value,description=document.getElementById("pDesc").value.trim(),url=document.getElementById("pImageUrl").value.trim(),file=document.getElementById("pImageFile").files[0],existing=products.find(p=>String(p.id)===id);let image=url||(existing?existing.image:"");if(file){compressImageFile(file,data=>{if(!data){toast('Imagem muito pesada ou inválida. Tente JPG/PNG menor.');return;}commitProduct({id:id?Number(id):Date.now(),name,price,category,description,image:data});});}else commitProduct({id:id?Number(id):Date.now(),name,price,category,description,image});}
+async function commitProduct(p){if(!isAdmin()){toast("Acesso de administrador necessário.");return;}if(products.some(x=>x.id===p.id))products=products.map(x=>x.id===p.id?p:x);else products.unshift(p);renderCategories();renderProducts();const ok=await persist();if(ok)closeAdmin();}
+function resetFilters(){document.getElementById("searchInput").value="";document.getElementById("mobileSearch").value="";selectedCategory="Todas";renderCategories();renderProducts();}
+function addCart(id){let p=products.find(x=>x.id===id);if(!p)return;let item=cart.find(x=>x.id===id);if(item)item.qty++;else cart.push({...p,qty:1});updateCart();toast("Item adicionado ao carrinho!");}
+function changeQty(id,d){let item=cart.find(x=>x.id===id);if(!item)return;item.qty+=d;if(item.qty<1)cart=cart.filter(x=>x.id!==id);updateCart();}
+function removeCart(id){cart=cart.filter(x=>x.id!==id);updateCart();}
+function updateCart(){document.getElementById("cartCount").textContent=cart.reduce((s,x)=>s+x.qty,0);document.getElementById("cartItems").innerHTML=cart.length?cart.map(x=>`<div class="flex justify-between items-center bg-gray-50 p-3 rounded-lg gap-2"><div><b class="text-xs">${safe(x.name)}</b><div class="text-red-600 text-xs">${money(x.price)}</div></div><div class="flex items-center gap-2"><button onclick="changeQty(${x.id},-1)" class="border rounded px-2">−</button>${x.qty}<button onclick="changeQty(${x.id},1)" class="border rounded px-2">+</button><button onclick="removeCart(${x.id})">🗑️</button></div></div>`).join(""):'<p class="text-gray-400 text-center py-8">Carrinho vazio.</p>';document.getElementById("cartTotal").textContent=money(cart.reduce((s,x)=>s+x.price*x.qty,0));}
+function toggleCart(){document.getElementById("cartModal").classList.toggle("hidden");updateCart();}
+function sendOrder(phone){
+  if(!cart.length){toast("Adicione itens ao carrinho.");return;}
+  const total=cart.reduce((sum,item)=>sum+(Number(item.price)||0)*(Number(item.qty)||0),0);
+  const payment=document.getElementById("orderPayment")?.value||"A combinar";
+  const lines=cart.map((item,index)=>{
+    const name=String(item.name||"Produto").replace(/[\r\n]+/g," ").trim();
+    const qty=Math.max(1,Number(item.qty)||1);
+    const price=Number(item.price)||0;
+    return `${index+1}) ${name}\n   Quantidade: ${qty}\n   Unitário: ${money(price)}\n   Subtotal: ${money(price*qty)}`;
+  });
+  const msg=[
+    "*NOVO PEDIDO - AUTO PEÇAS DA ROQUE*",
+    "📍 Rua Roque Barbosa, 16",
+    "",
+    "*PRODUTOS:*",
+    ...lines,
+    "",
+    `*TOTAL: ${money(total)}*`,
+    `*FORMA DE PAGAMENTO: ${payment}*`,
+    "",
+    "Olá! Gostaria de confirmar a disponibilidade e combinar a retirada/entrega."
+  ].join("\n");
+  const url=`https://wa.me/${String(phone).replace(/\D/g,"")}?text=${encodeURIComponent(msg)}`;
+  // Abrir diretamente no clique do usuário evita bloqueio de pop-up no celular.
+  window.open(url,"_blank","noopener,noreferrer");
+}
+function toast(msg){let t=document.getElementById("toast");t.textContent=msg;t.classList.remove("hidden");setTimeout(()=>t.classList.add("hidden"),2800);}
+document.addEventListener("DOMContentLoaded",()=>{document.getElementById("year").textContent=new Date().getFullYear();if(cloudConfigured)document.getElementById("syncNotice").classList.add("hidden");renderCategories();renderProducts();updateCart();lucide.createIcons();hydrateLocalImages();loadSharedProducts();});
+</script>
+</body></html>
