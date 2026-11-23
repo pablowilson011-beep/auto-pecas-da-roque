@@ -149,7 +149,16 @@ button:active{filter:brightness(.94)}
 </section>
 
 <section class="bg-white border-b py-5"><div class="max-w-7xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-4 text-center text-sm"><div>🛡️ <b>Peças de qualidade</b><p class="text-xs text-gray-500">Garantia conforme produto</p></div><div>🚚 <b>Entrega rápida</b><p class="text-xs text-gray-500">Consulte a região</p></div><div>💳 <b>Pagamento facilitado</b><p class="text-xs text-gray-500">Pix e cartão</p></div><div>🎧 <b>Suporte</b><p class="text-xs text-gray-500">Tire dúvidas pelo WhatsApp</p></div></div></section>
-<main id="catalogo" class="flex-grow max-w-7xl mx-auto px-4 py-10 w-full"><div id="syncNotice" class="mb-5 rounded-xl border border-amber-200 bg-amber-50 p-3 text-sm text-amber-900">Catálogo compartilhado. O cadastro e a edição são restritos ao administrador.</div><div class="flex flex-col md:flex-row justify-between gap-4 mb-7"><div class="roque-catalog-heading"><span class="roque-eyebrow">ENCONTRE A PEÇA CERTA</span><h3 class="text-2xl font-black uppercase">Catálogo <span>de Peças</span></h3><p class="text-gray-500 text-sm">Produtos para cuidar do seu carro, com preço justo.</p></div><div id="categoryButtons" class="flex flex-wrap gap-2"></div></div><div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"></div><div id="emptyState" class="hidden text-center py-12">Nenhum produto encontrado.</div></main>
+<main id="catalogo" class="flex-grow max-w-7xl mx-auto px-4 py-10 w-full"><div id="syncNotice" class="mb-5 rounded-xl border border-amber-200 bg-amber-50 p-3 text-sm text-amber-900">Catálogo compartilhado. O cadastro e a edição são restritos ao administrador.</div><div class="flex flex-col md:flex-row justify-between gap-4 mb-7"><div class="roque-catalog-heading"><span class="roque-eyebrow">ENCONTRE A PEÇA CERTA</span><h3 class="text-2xl font-black uppercase">Catálogo <span>de Peças</span></h3><p class="text-gray-500 text-sm">Produtos para cuidar do seu carro, com preço justo.</p></div><div id="categoryButtons" class="flex flex-wrap gap-2"></div></div><div class="mb-6 rounded-2xl border border-gray-200 bg-white p-4 shadow-sm">
+  <label for="vehicleFilter" class="mb-2 block text-sm font-bold text-gray-900">🚘 Encontrar peças para meu veículo</label>
+  <div class="flex flex-col gap-2 sm:flex-row">
+    <input id="vehicleFilter" list="vehicleSuggestions" oninput="renderProducts()" placeholder="Digite o carro que aparece na descrição (ex.: Celta, Corsa, Gol...)" class="w-full rounded-xl border border-gray-300 px-4 py-3 text-sm focus:border-red-500 focus:outline-none">
+    <datalist id="vehicleSuggestions"></datalist>
+    <button type="button" onclick="clearVehicleFilter()" class="rounded-xl border border-gray-300 px-4 py-3 text-sm font-semibold hover:bg-gray-50">Limpar filtro</button>
+  </div>
+  <p class="mt-2 text-xs text-gray-500">O filtro pesquisa os nomes dos veículos nas descrições que já estão cadastradas nos produtos. Não é necessário cadastrar os carros novamente.</p>
+</div>
+<div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"></div><div id="emptyState" class="hidden text-center py-12">Nenhum produto encontrado.</div></main>
 <section id="duvidas-whatsapp" class="bg-white border-t border-gray-200 py-10">
   <div class="max-w-5xl mx-auto px-4">
     <div class="rounded-2xl bg-gradient-to-r from-gray-900 to-gray-800 text-white p-7 md:p-9 text-center shadow-lg">
@@ -171,9 +180,36 @@ button:active{filter:brightness(.94)}
 <!-- Login do administrador Supabase -->
 <div id="loginModal" class="hidden fixed inset-0 bg-black/60 z-[70] flex items-center justify-center p-4"><div class="bg-white rounded-2xl max-w-sm w-full p-6 relative"><button onclick="closeLogin()" class="absolute right-4 top-3 text-2xl">×</button><h3 class="text-xl font-bold mb-2">Acesso do administrador</h3><p class="text-sm text-gray-500 mb-4">Somente a conta autorizada pode cadastrar ou editar produtos.</p><form onsubmit="loginAdmin(event)" class="space-y-3"><label class="block text-xs font-bold">E-mail<input id="adminEmail" type="email" autocomplete="username" required class="w-full border rounded-lg p-2 mt-1"></label><label class="block text-xs font-bold">Senha<input id="adminPassword" type="password" autocomplete="current-password" required class="w-full border rounded-lg p-2 mt-1"></label><p id="loginError" class="text-sm text-red-600"></p><button id="loginSubmit" class="bg-red-600 text-white font-bold rounded-lg px-5 py-2 w-full">Entrar</button></form></div></div>
 <!-- Admin dialog: cadastro e edição do produto e imagem -->
-<div id="adminModal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4"><div class="bg-white rounded-2xl max-w-lg w-full p-6 max-h-[90vh] overflow-y-auto relative"><button onclick="closeAdmin()" class="absolute right-4 top-3 text-2xl">×</button><h3 class="text-xl font-bold mb-4" id="adminTitle">Cadastrar produto</h3><form id="productForm" onsubmit="saveProduct(event)" class="space-y-3"><input type="hidden" id="pId"><label class="block text-xs font-bold">Nome do produto<input id="pName" required class="w-full border rounded-lg p-2 mt-1"></label><div class="grid grid-cols-2 gap-3"><label class="block text-xs font-bold">Preço (R$)<input id="pPrice" type="number" step="0.01" min="0" required class="w-full border rounded-lg p-2 mt-1"></label><label class="block text-xs font-bold">Categoria<select id="pCategory" class="w-full border rounded-lg p-2 mt-1"><option>Óleos</option><option>Aditivos</option><option>Freios</option><option>Motor</option><option>Elétrica</option><option>Suspensão</option><option>Acessórios</option><option>Baterias</option></select></label></div><label class="block text-xs font-bold">Descrição<input id="pDesc" class="w-full border rounded-lg p-2 mt-1"></label><label class="block text-xs font-bold">Imagem do produto (arquivo do celular/computador)<input id="pImageFile" type="file" accept="image/*" onchange="previewImage(event)" class="w-full border rounded-lg p-2 mt-1"></label><label class="block text-xs font-bold">Ou URL da imagem<input id="pImageUrl" type="url" placeholder="https://..." class="w-full border rounded-lg p-2 mt-1"></label><img id="imagePreview" class="hidden max-h-48 mx-auto object-contain rounded-lg border" alt="Prévia da imagem"><p class="text-xs text-gray-500">As alterações são sincronizadas com o Supabase e ficam visíveis para os visitantes. O acesso de edição é restrito ao administrador.</p><div class="flex justify-end gap-2 pt-2"><button type="button" onclick="adminLogout();closeAdmin()" class="border rounded-lg px-4 py-2">Sair</button><button type="button" onclick="closeAdmin()" class="border rounded-lg px-4 py-2">Cancelar</button><button class="bg-red-600 text-white font-bold rounded-lg px-5 py-2">Salvar</button></div></form></div></div>
+<div id="adminModal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4"><div class="bg-white rounded-2xl max-w-lg w-full p-6 max-h-[90vh] overflow-y-auto relative"><button onclick="closeAdmin()" class="absolute right-4 top-3 text-2xl">×</button><h3 class="text-xl font-bold mb-4" id="adminTitle">Cadastrar produto</h3><form id="productForm" onsubmit="saveProduct(event)" class="space-y-3"><input type="hidden" id="pId"><label class="block text-xs font-bold">Nome do produto<input id="pName" required class="w-full border rounded-lg p-2 mt-1"></label><div class="grid grid-cols-2 gap-3"><label class="block text-xs font-bold">Preço (R$)<input id="pPrice" type="number" step="0.01" min="0" required class="w-full border rounded-lg p-2 mt-1"></label><label class="block text-xs font-bold">Categoria<select id="pCategory" class="w-full border rounded-lg p-2 mt-1"><option>Óleos</option><option>Aditivos</option><option>Freios</option><option>Motor</option><option>Elétrica</option><option>Suspensão</option><option>Acessórios</option><option>Baterias</option></select></label></div><label class="block text-xs font-bold">Descrição curta (aparece no cartão)<input id="pDesc" class="w-full border rounded-lg p-2 mt-1"></label>
+<label class="block text-xs font-bold">Aplicação / veículos compatíveis<input id="pApplication" placeholder="Ex.: Celta 2001 a 2015, Corsa 2002 a 2012" class="w-full border rounded-lg p-2 mt-1"></label>
+<label class="block text-xs font-bold">Código da peça<input id="pPartCode" placeholder="Ex.: PD 42" class="w-full border rounded-lg p-2 mt-1"></label>
+<label class="block text-xs font-bold">Descrição completa<textarea id="pDetailsDescription" rows="3" placeholder="Informações adicionais sobre a peça..." class="w-full border rounded-lg p-2 mt-1"></textarea></label><label class="block text-xs font-bold">Imagem do produto (arquivo do celular/computador)<input id="pImageFile" type="file" accept="image/*" onchange="previewImage(event)" class="w-full border rounded-lg p-2 mt-1"></label><label class="block text-xs font-bold">Ou URL da imagem<input id="pImageUrl" type="url" placeholder="https://..." class="w-full border rounded-lg p-2 mt-1"></label><img id="imagePreview" class="hidden max-h-48 mx-auto object-contain rounded-lg border" alt="Prévia da imagem"><p class="text-xs text-gray-500">As alterações são sincronizadas com o Supabase e ficam visíveis para os visitantes. O acesso de edição é restrito ao administrador.</p><div class="flex justify-end gap-2 pt-2"><button type="button" onclick="adminLogout();closeAdmin()" class="border rounded-lg px-4 py-2">Sair</button><button type="button" onclick="closeAdmin()" class="border rounded-lg px-4 py-2">Cancelar</button><button class="bg-red-600 text-white font-bold rounded-lg px-5 py-2">Salvar</button></div></form></div></div>
+<div id="productDetailsModal" class="hidden fixed inset-0 bg-black/60 z-[65] flex items-center justify-center p-4" onclick="if(event.target===this)closeProductDetails()">
+  <div class="bg-white rounded-2xl max-w-lg w-full p-6 max-h-[90vh] overflow-y-auto relative shadow-2xl">
+    <button type="button" onclick="closeProductDetails()" aria-label="Fechar detalhes" class="absolute right-4 top-3 text-2xl text-gray-500">×</button>
+    <div id="detailCategory" class="text-xs font-bold uppercase tracking-wider text-red-600 mb-2"></div>
+    <h3 id="detailName" class="text-2xl font-black text-gray-900 pr-8"></h3>
+    <img id="detailImage" class="w-full h-48 object-contain bg-gray-50 rounded-xl my-4" alt="">
+    <div class="space-y-3">
+      <section class="rounded-xl bg-gray-50 p-3"><div class="text-xs font-bold uppercase text-gray-500 mb-1">Aplicação / veículos compatíveis</div><p id="detailApplication" class="text-sm text-gray-800 whitespace-pre-line"></p></section>
+      <section class="rounded-xl bg-gray-50 p-3"><div class="text-xs font-bold uppercase text-gray-500 mb-1">Código da peça</div><p id="detailPartCode" class="text-sm font-semibold text-gray-800"></p></section>
+      <section class="rounded-xl bg-gray-50 p-3"><div class="text-xs font-bold uppercase text-gray-500 mb-1">Descrição</div><p id="detailDescription" class="text-sm text-gray-800 whitespace-pre-line"></p></section>
+    </div>
+    <div class="flex items-center justify-between gap-3 border-t mt-4 pt-4">
+      <strong id="detailPrice" class="text-2xl text-red-600"></strong>
+      <button id="detailAddButton" type="button" class="bg-red-600 hover:bg-red-700 text-white font-bold px-4 py-3 rounded-xl">🛒 Adicionar</button>
+    </div>
+  </div>
+</div>
 <div id="cartModal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4"><div class="bg-white rounded-2xl max-w-md w-full p-6 max-h-[90vh] flex flex-col relative"><button onclick="toggleCart()" class="absolute right-4 top-3 text-2xl">×</button><h3 class="text-xl font-bold border-b pb-3 mb-3">🛍️ Seu Carrinho</h3><div id="cartItems" class="overflow-y-auto space-y-3 flex-grow"></div><div class="border-t pt-4"><label for="orderPayment" class="block text-sm font-semibold mb-2">Forma de pagamento</label><select id="orderPayment" class="w-full border rounded-lg p-3 mb-3"><option value="A combinar">A combinar</option><option value="Pix">Pix</option><option value="Dinheiro">Dinheiro</option><option value="Cartão de débito">Cartão de débito</option><option value="Cartão de crédito">Cartão de crédito</option></select><div class="flex justify-between font-bold text-xl mb-3"><span>Total</span><span id="cartTotal" class="text-red-600">R$ 0,00</span></div><button onclick="sendOrder('5521973227156')" class="w-full bg-green-600 text-white font-bold p-3 rounded-xl mb-2">Enviar pedido para (21) 97322-7156</button><button onclick="sendOrder('5521970286376')" class="w-full bg-emerald-600 text-white font-bold p-3 rounded-xl">Enviar pedido para (21) 97028-6376</button></div></div></div>
 <footer class="bg-gray-900 text-white mt-12 border-t-4 border-red-600"><div class="max-w-7xl mx-auto px-4 py-8 text-sm"><b>ROQUE AUTO PEÇAS</b><p class="text-gray-400 mt-2">Rua Roque Barbosa, 16 • (21) 97322-7156 • (21) 97028-6376</p><p class="text-gray-500 mt-3">Segunda a sexta: 08h às 18h • Sábado: 08h às 13h</p><p class="text-gray-500 mt-2">© <span id="year"></span> Auto Peças da Roque.</p></div></footer>
+
+<div id="roque-whatsapp-float-panel" class="hidden" style="position:fixed;right:18px;bottom:150px;z-index:46;width:min(300px,calc(100vw - 36px));background:#fff;border:1px solid #e5e7eb;border-radius:18px;padding:14px;box-shadow:0 16px 45px #0003">
+  <div style="font-weight:800;color:#171717;margin:2px 4px 10px">Fale com a Auto Peças da Roque</div>
+  <a href="https://wa.me/5521973227156?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20gostaria%20de%20tirar%20uma%20d%C3%BAvida." target="_blank" rel="noopener noreferrer" style="display:block;background:#16a34a;color:#fff;text-decoration:none;text-align:center;padding:11px;border-radius:11px;font-weight:700;margin-bottom:8px">WhatsApp (21) 97322-7156</a>
+  <a href="https://wa.me/5521970286376?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20gostaria%20de%20tirar%20uma%20d%C3%BAvida." target="_blank" rel="noopener noreferrer" style="display:block;background:#059669;color:#fff;text-decoration:none;text-align:center;padding:11px;border-radius:11px;font-weight:700">WhatsApp (21) 97028-6376</a>
+</div>
+<button type="button" id="roque-whatsapp-float" onclick="toggleWhatsAppFloat()" aria-label="Abrir atendimento pelo WhatsApp" aria-expanded="false" style="position:fixed;right:18px;bottom:82px;z-index:47;width:58px;height:58px;border:0;border-radius:999px;background:#16a34a;color:#fff;font-size:27px;box-shadow:0 8px 24px #16a34a66;cursor:pointer">☏</button>
 
 <a href="#catalogo" id="roque-float-catalog" aria-label="Ir para catálogo"
  style="position:fixed;right:18px;bottom:18px;z-index:35;background:#e11d2e;color:#fff;
@@ -326,11 +362,30 @@ async function loadSharedProducts(){
 }
 function money(n){return n.toLocaleString("pt-BR",{style:"currency",currency:"BRL"});}
 function safe(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
-function renderCategories(){let cats=["Todas",...new Set(products.map(p=>p.category))];document.getElementById("categoryButtons").innerHTML=cats.map(c=>`<button onclick="selectCategory('${safe(c)}')" class="px-3 py-2 rounded-lg text-xs ${selectedCategory===c?'bg-red-600 text-white font-bold':'bg-gray-100 hover:bg-gray-200'}">${safe(c)}</button>`).join("");}
+function renderCategories(){let cats=["Todas",...new Set(products.map(p=>p.category))];document.getElementById("categoryButtons").innerHTML=cats.map(c=>`<button onclick="selectCategory('${safe(c)}')" class="px-3 py-2 rounded-lg text-xs ${selectedCategory===c?'bg-red-600 text-white font-bold':'bg-gray-100 hover:bg-gray-200'}">${safe(c)}</button>`).join("");updateVehicleSuggestions();}
 function selectCategory(c){selectedCategory=c;renderCategories();renderProducts();}
+function normalizeSearch(value){return String(value||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().trim();}
+function clearVehicleFilter(){document.getElementById("vehicleFilter").value="";renderProducts();}
+function toggleWhatsAppFloat(){const panel=document.getElementById("roque-whatsapp-float-panel");const button=document.getElementById("roque-whatsapp-float");const opening=panel.classList.contains("hidden");panel.classList.toggle("hidden",!opening);button.setAttribute("aria-expanded",String(opening));button.textContent=opening?"×":"☏";}
+function updateVehicleSuggestions(){
+ const terms=new Set();
+ products.forEach(p=>{
+   const description=String(p.description||"");
+   const matches=description.matchAll(/(?:aplica(?:ção|coes|ções)?|compat[ií]vel(?: com)?|serve em|para)\s*[:\-]?\s*([^.;\n]+)/gi);
+   for(const match of matches){
+     match[1].split(/[,;|•]|\s+\/\s+|\s+e\s+/i).map(x=>x.trim()).filter(x=>x.length>=2&&x.length<=45).forEach(x=>terms.add(x));
+   }
+ });
+ document.getElementById("vehicleSuggestions").innerHTML=[...terms].sort((a,b)=>a.localeCompare(b,"pt-BR")).map(x=>`<option value="${safe(x)}"></option>`).join("");
+}
 function renderProducts(){
- let term=(document.getElementById("searchInput").value||document.getElementById("mobileSearch").value||"").toLowerCase().trim();
- let list=products.filter(p=>(selectedCategory==="Todas"||p.category===selectedCategory)&&(`${p.name} ${p.description} ${p.category}`).toLowerCase().includes(term));
+ let term=normalizeSearch(document.getElementById("searchInput").value||document.getElementById("mobileSearch").value||"");
+ let vehicleTerm=normalizeSearch(document.getElementById("vehicleFilter").value);
+ let list=products.filter(p=>{
+   const searchable=normalizeSearch(`${p.name} ${p.description} ${p.category}`);
+   const description=normalizeSearch(p.description||"");
+   return (selectedCategory==="Todas"||p.category===selectedCategory)&&searchable.includes(term)&&(!vehicleTerm||description.includes(vehicleTerm));
+ });
  document.getElementById("emptyState").classList.toggle("hidden",list.length>0);
  document.getElementById("productGrid").innerHTML=list.map(p=>`<article class="roque-product-card bg-white rounded-2xl shadow-sm border hover:shadow-xl flex flex-col overflow-hidden">
  <div class="roque-product-photo relative h-48 bg-gray-100 flex items-center justify-center overflow-hidden">
@@ -341,13 +396,31 @@ function renderProducts(){
  </div>
  <div class="roque-product-info p-5 flex flex-col flex-grow">
  <h4 class="font-bold text-gray-900 mb-1">${safe(p.name)}</h4>
- <p class="text-gray-500 text-xs mb-4 flex-grow">${safe(p.description||"Produto automotivo.")}</p>
+ <p class="text-gray-500 text-xs mb-3 flex-grow">${safe(p.description||"Produto automotivo.")}</p>
+ <button type="button" onclick="showProductDetails(${p.id})" class="self-start inline-flex items-center justify-center bg-red-700 hover:bg-red-800 text-sm font-black px-4 py-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 mb-3 transition-colors" style="color:#ffffff !important; text-shadow:0 1px 2px rgba(0,0,0,.75); letter-spacing:.2px; -webkit-font-smoothing:antialiased;">Ver detalhes</button>
  <div class="roque-product-bottom flex items-end justify-between border-t pt-3 gap-2">
  <div><span class="text-[10px] text-gray-400 block uppercase">Preço</span><span class="roque-product-price text-xl font-black text-red-600">${money(p.price)}</span></div>
  <button onclick="addCart(${p.id})" class="roque-add-button bg-red-600 text-white px-3 py-3 rounded-xl font-bold text-xs">🛒 <span>Adicionar</span></button>
  </div></div></article>`).join("");
 }
-function openAdmin(p=null){if(!isAdmin()){document.getElementById("loginModal").classList.remove("hidden");return;}document.getElementById("productForm").reset();document.getElementById("pId").value=p?p.id:"";document.getElementById("pName").value=p?p.name:"";document.getElementById("pPrice").value=p?p.price:"";document.getElementById("pCategory").value=p?p.category:"Óleos";document.getElementById("pDesc").value=p?p.description:"";document.getElementById("pImageUrl").value=p&&p.image&&!p.image.startsWith("data:")?p.image:"";let prev=document.getElementById("imagePreview");prev.src=p?p.image:"";prev.classList.toggle("hidden",!p||!p.image);document.getElementById("adminTitle").textContent=p?"Editar produto":"Cadastrar produto";document.getElementById("adminModal").classList.remove("hidden");}
+function showProductDetails(id){
+ const p=products.find(x=>String(x.id)===String(id));if(!p)return;
+ const legacy=String(p.description||"").trim();
+ const application=String(p.application||"").trim() || (legacy.match(/(?:aplica(?:ção|coes|ções)?|compat[ií]vel(?: com)?)[^•|]*/i)||[])[0] || "Consulte a descrição ou fale conosco para confirmar a aplicação.";
+ const code=String(p.partCode||"").trim() || (legacy.match(/(?:c[oó]digo)\\s*[:#-]?\\s*([A-Z0-9./-]+)/i)||[])[1] || "Não informado";
+ const details=String(p.detailsDescription||"").trim() || legacy || "Entre em contato para mais informações sobre este produto.";
+ document.getElementById("detailCategory").textContent=p.category||"";
+ document.getElementById("detailName").textContent=p.name||"Produto";
+ const image=document.getElementById("detailImage");image.src=p.image||"";image.classList.toggle("hidden",!p.image);
+ document.getElementById("detailApplication").textContent=application;
+ document.getElementById("detailPartCode").textContent=code;
+ document.getElementById("detailDescription").textContent=details;
+ document.getElementById("detailPrice").textContent=money(Number(p.price)||0);
+ document.getElementById("detailAddButton").onclick=()=>{addCart(p.id);closeProductDetails();};
+ document.getElementById("productDetailsModal").classList.remove("hidden");
+}
+function closeProductDetails(){document.getElementById("productDetailsModal").classList.add("hidden");}
+function openAdmin(p=null){if(!isAdmin()){document.getElementById("loginModal").classList.remove("hidden");return;}document.getElementById("productForm").reset();document.getElementById("pId").value=p?p.id:"";document.getElementById("pName").value=p?p.name:"";document.getElementById("pPrice").value=p?p.price:"";document.getElementById("pCategory").value=p?p.category:"Óleos";document.getElementById("pDesc").value=p?p.description:"";document.getElementById("pApplication").value=p?p.application||"":"";document.getElementById("pPartCode").value=p?p.partCode||"":"";document.getElementById("pDetailsDescription").value=p?p.detailsDescription||p.description||"":"";document.getElementById("pImageUrl").value=p&&p.image&&!p.image.startsWith("data:")?p.image:"";let prev=document.getElementById("imagePreview");prev.src=p?p.image:"";prev.classList.toggle("hidden",!p||!p.image);document.getElementById("adminTitle").textContent=p?"Editar produto":"Cadastrar produto";document.getElementById("adminModal").classList.remove("hidden");}
 function closeAdmin(){document.getElementById("adminModal").classList.add("hidden");}
 function editProduct(id){let p=products.find(x=>x.id===id);if(p)openAdmin(p);}
 function compressImageFile(file, callback){
@@ -395,9 +468,9 @@ function previewImage(e){
     document.getElementById("pImageUrl").value="";
   });
 }
-function saveProduct(e){e.preventDefault();let id=document.getElementById("pId").value,name=document.getElementById("pName").value.trim(),price=Number(document.getElementById("pPrice").value),category=document.getElementById("pCategory").value,description=document.getElementById("pDesc").value.trim(),url=document.getElementById("pImageUrl").value.trim(),file=document.getElementById("pImageFile").files[0],existing=products.find(p=>String(p.id)===id);let image=url||(existing?existing.image:"");if(file){compressImageFile(file,data=>{if(!data){toast('Imagem muito pesada ou inválida. Tente JPG/PNG menor.');return;}commitProduct({id:id?Number(id):Date.now(),name,price,category,description,image:data});});}else commitProduct({id:id?Number(id):Date.now(),name,price,category,description,image});}
+function saveProduct(e){e.preventDefault();let id=document.getElementById("pId").value,name=document.getElementById("pName").value.trim(),price=Number(document.getElementById("pPrice").value),category=document.getElementById("pCategory").value,description=document.getElementById("pDesc").value.trim(),application=document.getElementById("pApplication").value.trim(),partCode=document.getElementById("pPartCode").value.trim(),detailsDescription=document.getElementById("pDetailsDescription").value.trim(),url=document.getElementById("pImageUrl").value.trim(),file=document.getElementById("pImageFile").files[0],existing=products.find(p=>String(p.id)===id);let image=url||(existing?existing.image:"");const productData={id:id?Number(id):Date.now(),name,price,category,description,application,partCode,detailsDescription,image};if(file){compressImageFile(file,data=>{if(!data){toast('Imagem muito pesada ou inválida. Tente JPG/PNG menor.');return;}commitProduct({...productData,image:data});});}else commitProduct(productData);}
 async function commitProduct(p){if(!isAdmin()){toast("Acesso de administrador necessário.");return;}if(products.some(x=>x.id===p.id))products=products.map(x=>x.id===p.id?p:x);else products.unshift(p);renderCategories();renderProducts();const ok=await persist();if(ok)closeAdmin();}
-function resetFilters(){document.getElementById("searchInput").value="";document.getElementById("mobileSearch").value="";selectedCategory="Todas";renderCategories();renderProducts();}
+function resetFilters(){document.getElementById("searchInput").value="";document.getElementById("mobileSearch").value="";document.getElementById("vehicleFilter").value="";selectedCategory="Todas";renderCategories();renderProducts();}
 function addCart(id){let p=products.find(x=>x.id===id);if(!p)return;let item=cart.find(x=>x.id===id);if(item)item.qty++;else cart.push({...p,qty:1});updateCart();toast("Item adicionado ao carrinho!");}
 function changeQty(id,d){let item=cart.find(x=>x.id===id);if(!item)return;item.qty+=d;if(item.qty<1)cart=cart.filter(x=>x.id!==id);updateCart();}
 function removeCart(id){cart=cart.filter(x=>x.id!==id);updateCart();}
