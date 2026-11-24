@@ -300,7 +300,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <label class="block text-xs font-semibold">Rua / Avenida<input id="deliveryStreet" autocomplete="street-address" class="w-full border rounded-lg p-2 mt-1" placeholder="Nome da rua" oninput="clearDeliveryQuote()"></label>
 <label class="block text-xs font-semibold">Complemento (opcional)<input id="deliveryComplement" class="w-full border rounded-lg p-2 mt-1" placeholder="Apartamento, casa, referência"></label>
 <div class="grid grid-cols-2 gap-2"><label class="block text-xs font-semibold">Bairro<input id="deliveryNeighborhood" class="w-full border rounded-lg p-2 mt-1" placeholder="Bairro" oninput="clearDeliveryQuote()"></label><label class="block text-xs font-semibold">Cidade / UF<input id="deliveryCity" class="w-full border rounded-lg p-2 mt-1" placeholder="Cidade - UF" oninput="clearDeliveryQuote()"></label></div>
-<button type="button" id="calculateDeliveryButton" class="w-full bg-gray-900 text-white font-bold rounded-lg p-3">Calcular frete pela distância</button>
+<button type="button" id="calculateDeliveryButton" onclick="if(typeof window.calculateDeliveryQuote==='function'){window.calculateDeliveryQuote()}else{const r=document.getElementById('deliveryQuoteResult');r.textContent='O módulo de frete não carregou. Confira se delivery.js está na raiz do site e publique novamente.';r.classList.remove('hidden');}" class="w-full bg-gray-900 text-white font-bold rounded-lg p-3">Calcular frete pela distância</button>
 <div id="deliveryQuoteResult" class="hidden rounded-lg bg-red-50 border border-red-100 p-3 text-sm" aria-live="polite"></div>
 <p class="text-xs text-gray-500">A loja definirá o entregador (motoboy próprio ou Uber Flash) após receber o pedido.</p>
 </div>
@@ -662,5 +662,5 @@ function sendOrder(phone){
 function toast(msg){let t=document.getElementById("toast");t.textContent=msg;t.classList.remove("hidden");setTimeout(()=>t.classList.add("hidden"),2800);}
 document.addEventListener("DOMContentLoaded",()=>{initVehicleYearOptions();document.getElementById("year").textContent=new Date().getFullYear();if(cloudConfigured)document.getElementById("syncNotice").classList.add("hidden");renderCategories();renderProducts();updateCart();lucide.createIcons();hydrateLocalImages();loadSharedProducts();});
 </script>
-<script src="/delivery.js"></script>
+<script src="/delivery.js" onerror="(()=>{const r=document.getElementById('deliveryQuoteResult');if(r){r.textContent='Falha ao carregar delivery.js. Verifique se o arquivo está na raiz do projeto publicado.';r.classList.remove('hidden');}})()"></script>
 </body></html>
