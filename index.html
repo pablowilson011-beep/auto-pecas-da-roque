@@ -230,13 +230,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <section class="bg-white border-b py-5"><div class="max-w-7xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-4 text-center text-sm"><div>🛡️ <b>Peças de qualidade</b><p class="text-xs text-gray-500">Garantia conforme produto</p></div><div>🚚 <b>Entrega rápida</b><p class="text-xs text-gray-500">Consulte a região</p></div><div>💳 <b>Pagamento facilitado</b><p class="text-xs text-gray-500">Pix e cartão</p></div><div>🎧 <b>Suporte</b><p class="text-xs text-gray-500">Tire dúvidas pelo WhatsApp</p></div></div></section>
 <main id="catalogo" class="flex-grow max-w-7xl mx-auto px-4 py-10 w-full"><div id="syncNotice" class="mb-5 rounded-xl border border-amber-200 bg-amber-50 p-3 text-sm text-amber-900">Catálogo compartilhado. O cadastro e a edição são restritos ao administrador.</div><div class="flex flex-col md:flex-row justify-between gap-4 mb-7"><div class="roque-catalog-heading"><span class="roque-eyebrow">ENCONTRE A PEÇA CERTA</span><h3 class="text-2xl font-black uppercase">Catálogo <span>de Peças</span></h3><p class="text-gray-500 text-sm">Produtos para cuidar do seu carro, com preço justo.</p></div><div id="categoryButtons" class="flex flex-wrap gap-2"></div></div><div class="mb-6 rounded-2xl border border-gray-200 bg-white p-4 shadow-sm">
-  <label for="vehicleFilter" class="mb-2 block text-sm font-bold text-gray-900">🚘 Encontrar peças para meu veículo</label>
-  <div class="flex flex-col gap-2 sm:flex-row">
-    <input id="vehicleFilter" list="vehicleSuggestions" oninput="renderProducts()" placeholder="Digite o modelo do veículo (ex.: Celta, Corsa, Gol...)" class="w-full rounded-xl border border-gray-300 px-4 py-3 text-sm focus:border-red-500 focus:outline-none">
-    <datalist id="vehicleSuggestions"></datalist>
-    <button type="button" onclick="clearVehicleFilter()" class="rounded-xl border border-gray-300 px-4 py-3 text-sm font-semibold hover:bg-gray-50">Limpar filtro</button>
+  <div class="mb-3 flex flex-wrap items-center justify-between gap-2"><div><span class="text-xs font-black uppercase tracking-wider text-red-700">BUSCA INTELIGENTE</span><label class="mt-1 block text-base font-black text-gray-900">🚘 Encontre peças para o seu veículo</label><p class="text-xs text-gray-500">Informe os dados do carro e veja somente as peças com aplicação compatível cadastrada.</p></div><span class="rounded-full bg-red-50 px-3 py-1 text-xs font-bold text-red-700">Filtro por aplicação</span></div>
+  <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+    <label class="text-xs font-bold text-gray-700">Montadora
+      <select id="vehicleMake" onchange="renderProducts()" class="mt-1 w-full rounded-xl border border-gray-300 bg-white px-3 py-3 text-sm font-normal"><option value="">Todas</option><option>Chevrolet</option><option>Fiat</option><option>Ford</option><option>Volkswagen</option><option>Renault</option><option>Peugeot</option><option>Citroën</option><option>Honda</option><option>Toyota</option><option>Hyundai</option><option>Nissan</option><option>Mitsubishi</option><option>Jeep</option><option> Kia</option><option>Mercedes-Benz</option><option>BMW</option><option>Chery</option><option>RAM</option><option>Volvo</option></select>
+    </label>
+    <label class="text-xs font-bold text-gray-700">Modelo
+      <input id="vehicleModel" list="vehicleSuggestions" oninput="renderProducts()" placeholder="Ex.: Onix, Palio, Gol" class="mt-1 w-full rounded-xl border border-gray-300 px-3 py-3 text-sm font-normal"><datalist id="vehicleSuggestions"></datalist>
+    </label>
+    <label class="text-xs font-bold text-gray-700">Ano
+      <select id="vehicleYear" onchange="renderProducts()" class="mt-1 w-full rounded-xl border border-gray-300 bg-white px-3 py-3 text-sm font-normal"><option value="">Todos os anos</option></select>
+    </label>
+    <label class="text-xs font-bold text-gray-700">Motor (opcional)
+      <input id="vehicleEngine" oninput="renderProducts()" placeholder="Ex.: 1.0, 1.4, 1.6 16V" class="mt-1 w-full rounded-xl border border-gray-300 px-3 py-3 text-sm font-normal">
+    </label>
   </div>
-  <p class="mt-2 text-xs text-gray-500">A busca considera a aplicação e os veículos compatíveis cadastrados em cada produto. Cadastre essa informação no campo “Aplicação / veículos compatíveis” ao adicionar ou editar uma peça.</p>
+  <div class="mt-3 flex flex-wrap items-center justify-between gap-2"><p id="vehicleFilterStatus" aria-live="polite" class="text-xs text-gray-500">Preencha os dados para filtrar as peças compatíveis.</p><button type="button" onclick="clearVehicleFilter()" class="rounded-xl border border-gray-300 px-4 py-2 text-xs font-bold hover:bg-gray-50">Limpar veículo</button></div>
+  <p class="mt-2 text-[11px] text-gray-400">A compatibilidade depende das informações cadastradas em “Aplicação / veículos compatíveis”. Quando o ano ou motor não estiver informado, não será feita confirmação automática desse detalhe.</p>
 </div>
 <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"></div><div id="emptyState" class="hidden text-center py-12">Nenhum produto encontrado.</div></main>
 <section id="duvidas-whatsapp" class="bg-white border-t border-gray-200 py-10">
@@ -290,7 +300,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <label class="block text-xs font-semibold">Rua / Avenida<input id="deliveryStreet" autocomplete="street-address" class="w-full border rounded-lg p-2 mt-1" placeholder="Nome da rua" oninput="clearDeliveryQuote()"></label>
 <label class="block text-xs font-semibold">Complemento (opcional)<input id="deliveryComplement" class="w-full border rounded-lg p-2 mt-1" placeholder="Apartamento, casa, referência"></label>
 <div class="grid grid-cols-2 gap-2"><label class="block text-xs font-semibold">Bairro<input id="deliveryNeighborhood" class="w-full border rounded-lg p-2 mt-1" placeholder="Bairro" oninput="clearDeliveryQuote()"></label><label class="block text-xs font-semibold">Cidade / UF<input id="deliveryCity" class="w-full border rounded-lg p-2 mt-1" placeholder="Cidade - UF" oninput="clearDeliveryQuote()"></label></div>
-<button type="button" onclick="calculateDeliveryQuote()" id="calculateDeliveryButton" class="w-full bg-gray-900 text-white font-bold rounded-lg p-3">Calcular frete pela distância</button>
+<button type="button" id="calculateDeliveryButton" class="w-full bg-gray-900 text-white font-bold rounded-lg p-3">Calcular frete pela distância</button>
 <div id="deliveryQuoteResult" class="hidden rounded-lg bg-red-50 border border-red-100 p-3 text-sm" aria-live="polite"></div>
 <p class="text-xs text-gray-500">A loja definirá o entregador (motoboy próprio ou Uber Flash) após receber o pedido.</p>
 </div>
@@ -464,7 +474,15 @@ function safe(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&
 function renderCategories(){let cats=["Todas",...new Set(products.map(p=>p.category))];document.getElementById("categoryButtons").innerHTML=cats.map(c=>`<button onclick="selectCategory('${safe(c)}')" class="px-3 py-2 rounded-lg text-xs ${selectedCategory===c?'bg-red-600 text-white font-bold':'bg-gray-100 hover:bg-gray-200'}">${safe(c)}</button>`).join("");updateVehicleSuggestions();}
 function selectCategory(c){selectedCategory=c;renderCategories();renderProducts();}
 function normalizeSearch(value){return String(value||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().trim();}
-function clearVehicleFilter(){document.getElementById("vehicleFilter").value="";renderProducts();}
+function clearVehicleFilter(){
+ ['vehicleMake','vehicleModel','vehicleYear','vehicleEngine'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+ renderProducts();
+}
+function initVehicleYearOptions(){
+ const select=document.getElementById('vehicleYear');if(!select||select.options.length>1)return;
+ const current=new Date().getFullYear();
+ for(let year=current+1;year>=1980;year--){const option=document.createElement('option');option.value=String(year);option.textContent=String(year);select.appendChild(option);}
+}
 function toggleWhatsAppFloat(){const panel=document.getElementById("roque-whatsapp-float-panel");const button=document.getElementById("roque-whatsapp-float");const opening=panel.classList.contains("hidden");panel.classList.toggle("hidden",!opening);button.setAttribute("aria-expanded",String(opening));button.textContent=opening?"×":"☏";}
 function productApplicationText(p){
  // O campo de aplicação é a fonte principal; a descrição antiga fica como
@@ -472,21 +490,33 @@ function productApplicationText(p){
  const application=String(p.application||"").trim();
  return normalizeSearch(application || p.description || "");
 }
-function productMatchesVehicle(p, query){
- if(!query)return true;
+function productMatchesVehicle(p){
+ const make=normalizeSearch(document.getElementById('vehicleMake')?.value||'');
+ const model=normalizeSearch(document.getElementById('vehicleModel')?.value||'');
+ const year=Number(document.getElementById('vehicleYear')?.value||0);
+ const engine=normalizeSearch(document.getElementById('vehicleEngine')?.value||'');
+ if(!make&&!model&&!year&&!engine)return true;
  const application=productApplicationText(p);
- if(application.includes(query))return true;
- const tokens=query.split(/\s+/).filter(Boolean);
- const years=tokens.filter(t=>/^\d{4}$/.test(t)).map(Number);
- const models=tokens.filter(t=>!/^\d{4}$/.test(t));
- if(models.some(token=>!application.includes(token)))return false;
- if(years.length){
-   const yearText=application.replace(/\s+/g," ");
-   const yearMatches=[...yearText.matchAll(/(19\d{2}|20\d{2})\s*(?:a|ate|[-–])\s*(19\d{2}|20\d{2})/g)];
-   const yearOk=years.every(year=>yearText.includes(String(year))||yearMatches.some(m=>year>=Number(m[1])&&year<=Number(m[2])));
-   if(!yearOk)return false;
+ if(!application)return false;
+ // Montadora e modelo são verificados na aplicação cadastrada; evita sugerir peça sem evidência.
+ if(make&&!application.includes(make))return false;
+ if(model){
+   const modelTokens=model.split(/\s+/).filter(Boolean);
+   if(!modelTokens.every(token=>application.includes(token)))return false;
  }
- return tokens.length>0;
+ if(year){
+   const ranges=[...application.matchAll(/(19\d{2}|20\d{2})\s*(?:a|ate|[-–]|\/|\u00e0)\s*(19\d{2}|20\d{2})/g)];
+   const exactYears=[...application.matchAll(/\b(19\d{2}|20\d{2})\b/g)].map(m=>Number(m[1]));
+   const hasYearInfo=ranges.length>0||exactYears.length>0;
+   if(!hasYearInfo)return false;
+   const inRange=ranges.some(m=>year>=Math.min(Number(m[1]),Number(m[2]))&&year<=Math.max(Number(m[1]),Number(m[2])));
+   if(!inRange&&!exactYears.includes(year))return false;
+ }
+ if(engine){
+   const engineTokens=engine.split(/\s+/).filter(Boolean);
+   if(!engineTokens.every(token=>application.includes(token)))return false;
+ }
+ return true;
 }
 function updateVehicleSuggestions(){
  const terms=new Set();
@@ -507,11 +537,12 @@ function updateVehicleSuggestions(){
 }
 function renderProducts(){
  let term=normalizeSearch(document.getElementById("searchInput").value||document.getElementById("mobileSearch").value||"");
- let vehicleTerm=normalizeSearch(document.getElementById("vehicleFilter").value);
  let list=products.filter(p=>{
    const searchable=normalizeSearch(`${p.name} ${p.description} ${p.application||""} ${p.category}`);
-   return (selectedCategory==="Todas"||p.category===selectedCategory)&&searchable.includes(term)&&productMatchesVehicle(p,vehicleTerm);
+   return (selectedCategory==="Todas"||p.category===selectedCategory)&&searchable.includes(term)&&productMatchesVehicle(p);
  });
+ const status=document.getElementById('vehicleFilterStatus');
+ if(status){const active=!!(document.getElementById('vehicleMake').value||document.getElementById('vehicleModel').value||document.getElementById('vehicleYear').value||document.getElementById('vehicleEngine').value);status.textContent=active?`${list.length} produto(s) encontrado(s) com os critérios informados.`:'Preencha os dados para filtrar as peças compatíveis.';}
  document.getElementById("emptyState").classList.toggle("hidden",list.length>0);
  document.getElementById("productGrid").innerHTML=list.map(p=>`<article class="roque-product-card bg-white rounded-2xl shadow-sm border hover:shadow-xl flex flex-col overflow-hidden">
  <div class="roque-product-photo relative h-48 bg-gray-100 flex items-center justify-center overflow-hidden">
@@ -596,7 +627,7 @@ function previewImage(e){
 }
 function saveProduct(e){e.preventDefault();let id=document.getElementById("pId").value,name=document.getElementById("pName").value.trim(),price=Number(document.getElementById("pPrice").value),category=document.getElementById("pCategory").value,description=document.getElementById("pDesc").value.trim(),application=document.getElementById("pApplication").value.trim(),partCode=document.getElementById("pPartCode").value.trim(),detailsDescription=document.getElementById("pDetailsDescription").value.trim(),url=document.getElementById("pImageUrl").value.trim(),file=document.getElementById("pImageFile").files[0],existing=products.find(p=>String(p.id)===id);let image=url||(existing?existing.image:"");const productData={id:id?Number(id):Date.now(),name,price,category,description,application,partCode,detailsDescription,image};if(file){compressImageFile(file,data=>{if(!data){toast('Imagem muito pesada ou inválida. Tente JPG/PNG menor.');return;}commitProduct({...productData,image:data});});}else commitProduct(productData);}
 async function commitProduct(p){if(!isAdmin()){toast("Acesso de administrador necessário.");return;}if(products.some(x=>x.id===p.id))products=products.map(x=>x.id===p.id?p:x);else products.unshift(p);renderCategories();renderProducts();const ok=await persist();if(ok)closeAdmin();}
-function resetFilters(){document.getElementById("searchInput").value="";document.getElementById("mobileSearch").value="";document.getElementById("vehicleFilter").value="";selectedCategory="Todas";renderCategories();renderProducts();}
+function resetFilters(){document.getElementById("searchInput").value="";document.getElementById("mobileSearch").value="";["vehicleMake","vehicleModel","vehicleYear","vehicleEngine"].forEach(id=>{const el=document.getElementById(id);if(el)el.value="";});selectedCategory="Todas";renderCategories();renderProducts();}
 function addCart(id){let p=products.find(x=>x.id===id);if(!p)return;let item=cart.find(x=>x.id===id);if(item)item.qty++;else cart.push({...p,qty:1});updateCart();toast("Item adicionado ao carrinho!");}
 function changeQty(id,d){let item=cart.find(x=>x.id===id);if(!item)return;item.qty+=d;if(item.qty<1)cart=cart.filter(x=>x.id!==id);updateCart();}
 function removeCart(id){cart=cart.filter(x=>x.id!==id);updateCart();}
@@ -629,7 +660,7 @@ function sendOrder(phone){
   window.open(url,"_blank","noopener,noreferrer");
 }
 function toast(msg){let t=document.getElementById("toast");t.textContent=msg;t.classList.remove("hidden");setTimeout(()=>t.classList.add("hidden"),2800);}
-document.addEventListener("DOMContentLoaded",()=>{document.getElementById("year").textContent=new Date().getFullYear();if(cloudConfigured)document.getElementById("syncNotice").classList.add("hidden");renderCategories();renderProducts();updateCart();lucide.createIcons();hydrateLocalImages();loadSharedProducts();});
+document.addEventListener("DOMContentLoaded",()=>{initVehicleYearOptions();document.getElementById("year").textContent=new Date().getFullYear();if(cloudConfigured)document.getElementById("syncNotice").classList.add("hidden");renderCategories();renderProducts();updateCart();lucide.createIcons();hydrateLocalImages();loadSharedProducts();});
 </script>
 <script src="/delivery.js"></script>
 </body></html>
