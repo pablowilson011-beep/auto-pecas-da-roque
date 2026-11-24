@@ -300,7 +300,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <label class="block text-xs font-semibold">Rua / Avenida<input id="deliveryStreet" autocomplete="street-address" class="w-full border rounded-lg p-2 mt-1" placeholder="Nome da rua" oninput="clearDeliveryQuote()"></label>
 <label class="block text-xs font-semibold">Complemento (opcional)<input id="deliveryComplement" class="w-full border rounded-lg p-2 mt-1" placeholder="Apartamento, casa, referência"></label>
 <div class="grid grid-cols-2 gap-2"><label class="block text-xs font-semibold">Bairro<input id="deliveryNeighborhood" class="w-full border rounded-lg p-2 mt-1" placeholder="Bairro" oninput="clearDeliveryQuote()"></label><label class="block text-xs font-semibold">Cidade / UF<input id="deliveryCity" class="w-full border rounded-lg p-2 mt-1" placeholder="Cidade - UF" oninput="clearDeliveryQuote()"></label></div>
-<button type="button" id="calculateDeliveryButton" onclick="if(window.RoqueDeliveryLoaded && typeof window.calculateDeliveryQuote==='function'){window.calculateDeliveryQuote()}else{const r=document.getElementById('deliveryQuoteResult');r.textContent='O módulo de frete não foi inicializado nesta página. Publique novamente o index.html deste pacote.';r.classList.remove('hidden');}" class="w-full bg-gray-900 text-white font-bold rounded-lg p-3">Calcular frete pela distância</button>
+<button type="button" id="calculateDeliveryButton" onclick="const r=document.getElementById('deliveryQuoteResult');if(typeof window.calculateDeliveryQuote==='function'){window.calculateDeliveryQuote()}else{r.textContent='O código do cálculo não foi carregado. Atualize a página e, se persistir, confira se o index.html publicado é o deste pacote.';r.classList.remove('hidden');}" class="w-full bg-gray-900 text-white font-bold rounded-lg p-3">Calcular frete pela distância</button>
 <div id="deliveryQuoteResult" class="hidden rounded-lg bg-red-50 border border-red-100 p-3 text-sm" aria-live="polite"></div>
 <p class="text-xs text-gray-500">A loja definirá o entregador (motoboy próprio ou Uber Flash) após receber o pedido.</p>
 </div>
@@ -672,6 +672,12 @@ let deliverySettings={...DELIVERY_DEFAULTS};
 let currentDeliveryQuote=null;
 let deliveryOrdersCache=[];
 let deliverySubmitting=false;
+
+// Inicialização antecipada: disponibiliza o cálculo antes de qualquer integração
+// administrativa/Supabase. Assim, um erro secundário do painel não bloqueia o botão.
+window.RoqueDeliveryLoaded=true;
+window.calculateDeliveryQuote=calculateDeliveryQuote;
+window.RoqueDeliveryInitError=null;
 
 function updateDeliveryAdminButton(){
   const b=document.getElementById('deliveryAdminButton');
