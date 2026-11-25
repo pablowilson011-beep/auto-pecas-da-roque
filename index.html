@@ -177,7 +177,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 
 <div class="bg-gray-900 text-gray-200 text-xs py-2 px-4"><div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2"><span>📍 <b>Endereço:</b> Rua Roque Barbosa, 16</span><div class="flex gap-4"><a href="https://wa.me/5521973227156">(21) 97322-7156</a><a href="https://wa.me/5521970286376">(21) 97028-6376</a></div></div></div>
-<header class="bg-white shadow-md sticky top-0 z-40"><div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-3"><div onclick="resetFilters()" class="flex items-center gap-3 cursor-pointer"><div class="bg-red-600 text-white p-2 rounded-lg font-black text-xl">🔧 ROQUE</div><div><h1 class="font-extrabold text-xl">AUTO PEÇAS</h1><span class="text-xs text-red-600 font-semibold tracking-widest uppercase">Da Roque</span></div></div><div class="hidden md:block flex-1 max-w-md mx-5"><input id="searchInput" oninput="renderProducts()" placeholder="Buscar peças..." class="w-full px-4 py-2 border rounded-full text-sm"></div><div class="flex gap-2"><button onclick="openAdmin()" class="bg-gray-100 border rounded-lg px-3 py-2 text-sm font-semibold">🔐 Administração</button><button id="deliveryAdminButton" onclick="openDeliveryAdmin()" class="hidden bg-white text-red-700 border border-red-200 rounded-lg px-3 py-2 text-sm font-bold">🚚 Entregas</button><button onclick="toggleCart()" class="bg-red-600 text-white rounded-lg px-4 py-2 text-sm">🛒 Carrinho <span id="cartCount">0</span></button></div></div><div class="md:hidden px-4 pb-3"><input id="mobileSearch" oninput="document.getElementById('searchInput').value=this.value;renderProducts()" placeholder="Buscar produtos..." class="w-full px-4 py-2 border rounded-full text-sm"></div></header>
+<header class="bg-white shadow-md sticky top-0 z-40"><div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-3"><div onclick="resetFilters()" class="flex items-center gap-3 cursor-pointer"><div class="bg-red-600 text-white p-2 rounded-lg font-black text-xl">🔧 ROQUE</div><div><h1 class="font-extrabold text-xl">AUTO PEÇAS</h1><span class="text-xs text-red-600 font-semibold tracking-widest uppercase">Da Roque</span></div></div><div class="hidden md:block flex-1 max-w-md mx-5"><input id="searchInput" oninput="renderProducts()" placeholder="Buscar peças..." class="w-full px-4 py-2 border rounded-full text-sm"></div><div class="flex gap-2"><button id="adminButton" onclick="openAdmin()" class="hidden bg-gray-100 border rounded-lg px-3 py-2 text-sm font-semibold">🔐 Administração</button><button id="deliveryAdminButton" onclick="openDeliveryAdmin()" class="hidden bg-white text-red-700 border border-red-200 rounded-lg px-3 py-2 text-sm font-bold">🚚 Entregas</button><button onclick="toggleCart()" class="bg-red-600 text-white rounded-lg px-4 py-2 text-sm">🛒 Carrinho <span id="cartCount">0</span></button></div></div><div class="md:hidden px-4 pb-3"><input id="mobileSearch" oninput="document.getElementById('searchInput').value=this.value;renderProducts()" placeholder="Buscar produtos..." class="w-full px-4 py-2 border rounded-full text-sm"></div></header>
 <section class="hero-pattern text-white" aria-label="Auto Peças da Roque - página inicial">
  <div class="max-w-7xl mx-auto px-4 py-12 md:py-16 grid md:grid-cols-2 gap-8 items-center">
   <div class="text-center md:text-left">
@@ -484,11 +484,15 @@ function initVehicleYearOptions(){
  for(let year=current+1;year>=1980;year--){const option=document.createElement('option');option.value=String(year);option.textContent=String(year);select.appendChild(option);}
 }
 function toggleWhatsAppFloat(){const panel=document.getElementById("roque-whatsapp-float-panel");const button=document.getElementById("roque-whatsapp-float");const opening=panel.classList.contains("hidden");panel.classList.toggle("hidden",!opening);button.setAttribute("aria-expanded",String(opening));button.textContent=opening?"×":"☏";}
+function productApplicationRaw(p){
+ // Fonte do filtro por veículo: campo "Aplicação / veículos compatíveis" +
+ // "Descrição completa" (detalhes). O título do produto NÃO é usado.
+ return [p.application,p.detailsDescription].map(x=>String(x||"").trim()).filter(Boolean).join(" ; ");
+}
 function productApplicationText(p){
- // O campo de aplicação é a fonte principal; a descrição antiga fica como
- // compatibilidade para produtos cadastrados antes da inclusão desse campo.
- const application=String(p.application||"").trim();
- return normalizeSearch(application || p.description || "");
+ // A descrição curta antiga fica como compatibilidade para produtos
+ // cadastrados antes da inclusão desses campos.
+ return normalizeSearch(productApplicationRaw(p) || p.description || "");
 }
 function productMatchesVehicle(p){
  const make=normalizeSearch(document.getElementById('vehicleMake')?.value||'');
@@ -521,7 +525,7 @@ function productMatchesVehicle(p){
 function updateVehicleSuggestions(){
  const terms=new Set();
  products.forEach(p=>{
-   const application=String(p.application||"").trim();
+   const application=productApplicationRaw(p);
    const source=application || String(p.description||"");
    const matches=source.matchAll(/(?:aplica(?:ção|coes|ções)?|compat[ií]vel(?: com)?|serve em|para)\s*[:\-]?\s*([^.;\n]+)/gi);
    let found=false;
@@ -679,10 +683,20 @@ window.RoqueDeliveryLoaded=true;
 window.calculateDeliveryQuote=calculateDeliveryQuote;
 window.RoqueDeliveryInitError=null;
 
+function roqueAdminLinkActive(){
+  try{
+    if(location.hash==='#admin')sessionStorage.setItem('roqueShowAdmin','1');
+    return sessionStorage.getItem('roqueShowAdmin')==='1';
+  }catch(e){return location.hash==='#admin';}
+}
 function updateDeliveryAdminButton(){
   const b=document.getElementById('deliveryAdminButton');
   if(b)b.classList.toggle('hidden',!isAdmin());
+  // Botão "Administração": só aparece com o link #admin ou com login ativo
+  const a=document.getElementById('adminButton');
+  if(a)a.classList.toggle('hidden',!(isAdmin()||roqueAdminLinkActive()));
 }
+window.addEventListener('hashchange',updateDeliveryAdminButton);
 function onDeliveryTypeChange(){
   const type=document.getElementById('orderDeliveryType')?.value||'delivery';
   document.getElementById('deliveryAddressFields')?.classList.toggle('hidden',type==='pickup');
